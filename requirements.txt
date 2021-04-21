@@ -1,0 +1,6 @@
+wget>=3.2
+gdown>=3.11.0
+pydicom>=2.1.1
+torch>=1.8.1
+torchvision>=0.9.1
+albumentations>=0.1.12
