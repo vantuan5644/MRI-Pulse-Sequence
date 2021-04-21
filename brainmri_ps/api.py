@@ -50,16 +50,6 @@ class PulseSequenceClassifier():
         if model_name not in supported_models:
             raise NotImplementedError('Currently supported models are', list(model_urls.keys()))
 
-        self.model = create_model(self.model_name, pretrained=False, n_classes=7)
-        self.model = self.model.to(self.device)
-        self.model = nn.DataParallel(self.model)
-
-        self.transform = A.Compose([
-            A.Resize(256, 256),
-            A.Normalize(),
-            AT.ToTensor()
-        ])
-
         self.label_dict = dict([
             (0, "FLAIR"),
             (1, "T1C"),
@@ -68,6 +58,16 @@ class PulseSequenceClassifier():
             (4, "DWI"),
             (5, "TOF"),
             (6, "OTHER"),
+        ])
+
+        self.model = create_model(self.model_name, pretrained=False, n_classes=len(self.label_dict.keys()))
+        self.model = self.model.to(self.device)
+        self.model = nn.DataParallel(self.model)
+
+        self.transform = A.Compose([
+            A.Resize(256, 256),
+            A.Normalize(),
+            AT.ToTensor()
         ])
 
     def from_pretrained(self):

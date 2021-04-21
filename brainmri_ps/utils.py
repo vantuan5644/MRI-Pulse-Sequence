@@ -44,7 +44,7 @@ def dcm2image(dcm_path):
 def study2series_dict(study_path):
     series_dict = {}
 
-    dcm_paths = glob.glob("{}/*.dcm".format(study_path))
+    dcm_paths = glob.glob("{}/*.dcm".format(study_path)) + glob.glob("{}/*.dicom".format(study_path))
     for dcm_path in dcm_paths:
         dcm = dcmread(dcm_path)
         series_uid = dcm.SeriesInstanceUID
