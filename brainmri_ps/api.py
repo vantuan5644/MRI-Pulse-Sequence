@@ -62,7 +62,8 @@ class PulseSequenceClassifier():
 
         self.model = create_model(self.model_name, pretrained=False, n_classes=len(self.label_dict.keys()))
         self.model = self.model.to(self.device)
-        self.model = nn.DataParallel(self.model)
+        # self.model = nn.DataParallel(self.model)
+        self.model = WrappedModel(self.model)
 
         self.transform = A.Compose([
             A.Resize(256, 256),
@@ -130,3 +131,15 @@ class PulseSequenceClassifier():
             self.series_dict[series_uid] = self.label_dict[preds[i]]
 
         return self.series_dict
+
+
+class WrappedModel(nn.Module):
+    """
+    To load DataParallel checkpoint without calling DP module
+    """
+    def __init__(self, module):
+        super(WrappedModel, self).__init__()
+        self.module = module
+
+    def forward(self, x):
+        return self.module(x)
