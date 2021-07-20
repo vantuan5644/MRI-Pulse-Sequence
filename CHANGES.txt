@@ -1,1 +1,3 @@
 v<0.1.0>, <2020-04-13> -- Initial release.
+v<1.0.0>, <2021-04-21> -- Stable release.
+v<1.1.0>, <2021-07-19> -- Added more MRI scans.

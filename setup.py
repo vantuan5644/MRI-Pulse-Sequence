@@ -5,7 +5,7 @@ with open('requirements.txt') as fp:
 
 setup(
     name='brainmri_ps',
-    version='1.0.2',
+    version='1.1.1',
     packages=['brainmri_ps'],
     url='',
     license='LICENSE.txt',
