@@ -68,7 +68,7 @@ class PulseSequenceClassifier():
         self.transform = A.Compose([
             A.Resize(256, 256),
             A.Normalize(),
-            AT.ToTensor()
+            AT.ToTensorV2()
         ])
 
     def from_pretrained(self):
